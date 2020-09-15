@@ -95,27 +95,35 @@ class SortingRobot:
         return self._light == "ON"
 
     def sort(self):
-        """
-
- for i in range(len(arr)):
-        for j in range(0, len(self._list)-i-1):
-            if self._list[j] > self._list[j+1]:
-                self._list[j], self._list[j+1] = self._list[j+1], self._list[j]
-
-    return self._list
-
-
-    
-# Understanding
+        self.swap_item()
+        self.set_light_on()
+        # Understanding
         # Input is an unordered list
         # Outputs are a return sorted list
         # My cases are size dependent of the array
 
-# Planning
-    # While there is non-empty array
-    # if the item the robot is holding is greater than the item it's being compared to go right
+        # Planning
+        # While there is non-empty array
+        # if the item the robot is holding is greater than the item it's being compared to go right and swap
+        # with i+1 card.(Selection sorting?)
 
-    
+        while self.light_is_on():
+
+            while self.move_right():
+                if self.compare_item() > 0:
+                    self.swap_item()
+
+            if self.compare_item() is None and self.can_move_right() is False:
+                self.swap_item()
+                self.set_light_off()
+                break
+            else:
+                while self.move_left():
+                    if self.compare_item() is None:
+                        self.swap_item()
+                        self.move_right()
+                        self.swap_item()
+                        break
 
 
 if __name__ == "__main__":
